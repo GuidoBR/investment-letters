@@ -23,7 +23,7 @@ def download_many(letters):
         print("Downloading {} ...".format(letter[0]))
         pdf = get_letter(letter[1])
         save_letter(pdf, '{}.pdf'.format(letter[0]))
-    return len(pt_letters)
+    return len(letters)
 
 def main():
     t0 = time.time()
