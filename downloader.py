@@ -1,6 +1,6 @@
 import os
 import time
-from dynamo import Dynamo
+from crawlers.dynamo import Dynamo
 import requests
 
 def save_letter(pdf, filename, dest_dir):
