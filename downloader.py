@@ -1,6 +1,7 @@
 import os
 import time
 from crawlers.dynamo import Dynamo
+from crawlers.berkshirehathaway import Berkshirehathaway
 import requests
 
 def save_letter(pdf, filename, dest_dir):
@@ -23,11 +24,17 @@ def download_many(letters):
 
 def main():
     t0 = time.time()
+
     pt = Dynamo("pt")
-    letters = pt.crawl()
     en = Dynamo("en")
+    bh = Berkshirehathaway()
+
+    letters = pt.crawl()
     letters.extend(en.crawl())
+    letters.extend(bh.crawl())
+
     count = download_many(letters)
+
     elapsed = time.time() - t0
     msg = '\n{} letters downloaded in {:.2f}s'
     print(msg.format(count, elapsed))
