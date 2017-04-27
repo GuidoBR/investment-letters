@@ -1,6 +1,6 @@
 import os
 import time
-import dynamo
+import dynamo_pt as dynamo
 import requests
 
 BASE_URL = "http://www.dynamo.com.br/"
