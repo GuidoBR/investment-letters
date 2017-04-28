@@ -18,8 +18,11 @@ def get_letter(link):
 def download_many(letters):
     for letter in letters:
         print("Downloading {} ...".format(letter[0]))
-        pdf = get_letter(letter[1])
-        save_letter(pdf, '{}.pdf'.format(letter[0]), letter[2])
+        try:
+            pdf = get_letter(letter[1])
+            save_letter(pdf, '{}.pdf'.format(letter[0]), letter[2])
+        except:
+            print("Failed to download letter {}".format(letter[0]))
     return len(letters)
 
 def main():
