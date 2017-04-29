@@ -34,9 +34,13 @@ def main():
     bh = Berkshirehathaway()
     arx = Arx()
 
+    print("Starting Dyanmo PT")
     letters = pt.crawl()
+    print("Starting Dyanmo EN")
     letters.extend(en.crawl())
+    print("Starting Berkshirehathway")
     letters.extend(bh.crawl())
+    print("Starting ARX")
     letters.extend(arx.crawl())
 
     count = download_many(letters)
