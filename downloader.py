@@ -2,6 +2,7 @@ import os
 import time
 from crawlers.dynamo import Dynamo
 from crawlers.berkshirehathaway import Berkshirehathaway
+from crawlers.arx import Arx
 import requests
 
 def save_letter(pdf, filename, dest_dir):
@@ -31,10 +32,12 @@ def main():
     pt = Dynamo("pt")
     en = Dynamo("en")
     bh = Berkshirehathaway()
+    arx = Arx()
 
     letters = pt.crawl()
     letters.extend(en.crawl())
     letters.extend(bh.crawl())
+    letters.extend(arx.crawl())
 
     count = download_many(letters)
 
