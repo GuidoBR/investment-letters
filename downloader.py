@@ -31,16 +31,7 @@ async def download_letter(session, letter):
 
 async def main(loop):
     t0 = time.time()
-
-    pt = Dynamo("pt")
-    en = Dynamo("en")
-    bh = Berkshirehathaway()
-    arx = Arx()
-
-    letters = pt.crawl()
-    letters.extend(en.crawl())
-    letters.extend(bh.crawl())
-    # letters.extend(arx.crawl())
+    letters = get_letters()
 
     async with aiohttp.ClientSession(loop=loop) as session:
         for l in letters:
@@ -51,6 +42,17 @@ async def main(loop):
     msg = '\n{} letters downloaded in {:.2f}s'
     print(msg.format(count, elapsed))
 
+def get_letters():
+    pt = Dynamo("pt")
+    en = Dynamo("en")
+    bh = Berkshirehathaway()
+    arx = Arx()
+
+    letters = pt.crawl()
+    letters.extend(en.crawl())
+    letters.extend(bh.crawl())
+    # letters.extend(arx.crawl())
+    return letters
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
