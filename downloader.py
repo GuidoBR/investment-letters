@@ -5,6 +5,7 @@ import requests
 from crawlers.dynamo import Dynamo
 from crawlers.berkshirehathaway import Berkshirehathaway
 from crawlers.arx import Arx
+from crawlers.tropico import Tropico
 
 import aiohttp
 import aiofiles
@@ -40,18 +41,20 @@ async def main(loop):
 
     elapsed = time.time() - t0
     msg = '\n{} letters downloaded in {:.2f}s'
-    print(msg.format(count, elapsed))
+    print(msg.format(len(letters), elapsed))
 
 def get_letters():
     pt = Dynamo("pt")
     en = Dynamo("en")
     bh = Berkshirehathaway()
     arx = Arx()
+    tropico = Tropico()
 
     letters = pt.crawl()
     letters.extend(en.crawl())
     letters.extend(bh.crawl())
-    # letters.extend(arx.crawl())
+    letters.extend(arx.crawl())
+    letters.extend(tropico.crawl())
     return letters
 
 if __name__ == "__main__":
