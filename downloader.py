@@ -6,6 +6,7 @@ from crawlers.dynamo import Dynamo
 from crawlers.berkshirehathaway import Berkshirehathaway
 from crawlers.arx import Arx
 from crawlers.tropico import Tropico
+from crawlers.xpgestao import XPGestao
 
 import aiohttp
 import aiofiles
@@ -49,12 +50,14 @@ def get_letters():
     bh = Berkshirehathaway()
     arx = Arx()
     tropico = Tropico()
+    xp = XPGestao()
 
     letters = pt.crawl()
     letters.extend(en.crawl())
     letters.extend(bh.crawl())
     letters.extend(arx.crawl())
     letters.extend(tropico.crawl())
+    letters.extend(xp.crawl())
     return letters
 
 if __name__ == "__main__":
