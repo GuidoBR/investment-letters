@@ -34,7 +34,7 @@ class Dynamo:
         return ["{}?page={}".format(self.get_letters_url(), i) for i in range(1, 5)]
 
     def extract_pdf(self, html):
-        soup = BeautifulSoup(html, "html.parser")     
+        soup = BeautifulSoup(html, "html.parser")
         links = soup.find_all('a', href=re.compile(r'(\.pdf)'))
         return [
                 (
